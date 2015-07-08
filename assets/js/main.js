@@ -1,7 +1,7 @@
 angular.module('Encuesta',['ngSails'])
-	.config(['$sailsProvider', function ($sailsProvider) {
+	/*.config(['$sailsProvider', function ($sailsProvider) {
     	$sailsProvider.url = 'http://localhost:1337';
-	}])
+	}])*/
 	.controller('quizController',quizcontroller)
 	.controller('questionController',questionController)
 
