@@ -1,0 +1,56 @@
+<div class="quiz" ng-show="encuestas.show">
+	<div class="listarEncuestas">
+		<h3>Listado de encuestas</h3>
+		<table class="table table-condensed table-responsive" >
+			<thead>
+				<tr>
+					<td>Nombre</td>
+					<td>Fecha de creación</td>
+					<td class="text-center" colspan="3">Acciones</td>
+				</tr>
+			</thead>
+			<tr ng-repeat="quiz in encuestas.data">
+				<td><a href="/quizes/{{quiz.id}}/resolve">{{quiz.title}}</a></td>
+				<td>{{quiz.createdAt | date : 'd-MMM-yyyy hh:m a'}}</td>
+				<td class="text-center"><a href="#" ng-click="showUpdateQuiz(quiz)">Modificar</a></td>
+				<td class="text-center"><a href="/quiz/results/{{quiz.id}}" >Resultados</a></td>
+				<td class="text-center"><a href="#" ng-click="deleteQuiz(quiz.id)" class="text-danger">Eliminar</a></td>
+
+			</tr>
+		</table>		
+	</div>
+	<div class="crearEncuesta">
+		<h3>Creación de encuestas</h3>
+		<form  name="createQuiz" ng-submit="createquiz(title)" novalidate>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Nombre de la encuesta" required ng-model="title" >
+			</div>
+			<button type="submit" class="btn btn-primary" ng-disabled="createQuiz.$invalid">Crear Encuesta</button>
+		</form>		
+	</div>
+	<div class="modificarEncuesta" ng-show="encuestas.modificar">
+		<h3>Lista de preguntas</h3>
+		<!--<form name="updateQuiz" ng-submit="updatequiz(encuestas.quizToken)" novalidate>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Nuevo Nombre" ng-model="encuestas.quizToken.title" required>
+			</div>
+			<button type="submit" class="btn btn-primary" ng-disabled="updateQuiz.$invalid"> Actualizar </button>
+			<button type="button" class="btn btn-danger" ng-click="encuestas.modificar=false"> Cancelar </button>
+		</form>-->
+		<ul class="list-group" >
+			<li class="list-group-item list-group-item-info">{{encuestas.preguntas.response}}</li>
+		
+			<a href="#" ng-click="deleteQuestion(question)" ng-repeat="question in encuestas.preguntas.data" class="list-group-item" as-sortable-item>
+				<p>{{question.title}} <code class="glyphicon glyphicon-remove right-icon"></code></p>
+			</a>
+			<br>
+			<form name="createQuestion" ng-submit="createquestion(questionTitle)" novalidate>
+				<h4>Crear pregunta</h4>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Nombre de la pregunta" required ng-model="questionTitle" >
+				</div>
+				<button type="submit" class="btn btn-primary" ng-disabled="createQuestion.$invalid">Crear Pregunta</button>				
+			</form>	
+		</ul>
+	</div>
+</div>

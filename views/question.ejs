@@ -1,0 +1,14 @@
+<div class="wrapper" ng-controller="questionController">
+	<form ng-submit="responsequiz(form)" name="responseQuiz">
+		<h3>Complete todos los campos</h3>
+		<input type="hidden" id="quizId" value="<%=questions.id%>" >
+		<% questions.question.forEach(function(question){  %>
+			<div class="form-group">
+				<label for="<%= question.title %>"><%= question.title %></label>
+				<input type="text" class="form-control" id="<%= question.title %>" placeholder="<%= question.title %>" required ng-model="<%= "form["+question.id+"]" %>">
+		  </div>
+		<% }) %>
+		<button type="submit" class="btn btn-primary">Enviar</button>
+		<button type="reset" class="btn btn-danger">Cancelar</button>
+	</form>
+</div>
